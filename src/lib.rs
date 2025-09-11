@@ -99,7 +99,7 @@ impl VoucherClient {
         if status != StatusCode::OK {
             match status {
                 _ if !api_response.status.code().is_success() => {
-                    return Err(Error::Voucher(api_response.status.message));
+                    return Err(Error::Voucher(Box::new(api_response)));
                 }
                 _ => {
                     return Err(Error::StatusCode(status.as_u16(), body));
@@ -139,7 +139,7 @@ impl VoucherClient {
         if status != StatusCode::OK {
             match status {
                 _ if !api_response.status.code().is_success() => {
-                    return Err(Error::Voucher(api_response.status.message));
+                    return Err(Error::Voucher(Box::new(api_response)));
                 }
                 _ => {
                     return Err(Error::StatusCode(status.as_u16(), body));

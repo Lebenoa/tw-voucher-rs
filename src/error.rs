@@ -1,5 +1,7 @@
 use thiserror::Error;
 
+use crate::response::APIResponse;
+
 #[derive(Debug, Error)]
 pub enum Error {
     #[error("Most likely: Cloudflare Forbidden")]
@@ -21,5 +23,5 @@ pub enum Error {
     StatusCode(u16, String),
 
     #[error("Voucher Error: {0}")]
-    Voucher(String),
+    Voucher(Box<APIResponse>),
 }

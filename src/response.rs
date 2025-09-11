@@ -29,6 +29,7 @@ impl<'a> StatusCode<'a> {
     }
 }
 
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 #[derive(Deserialize, Debug)]
 pub struct Status {
     pub message: String,
@@ -48,6 +49,7 @@ impl Status {
     }
 }
 
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 #[derive(Deserialize, Debug)]
 pub struct Voucher {
     pub voucher_id: String,
@@ -63,16 +65,19 @@ pub struct Voucher {
     pub available: u16,
 }
 
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 #[derive(Deserialize, Debug)]
 pub struct OwnerProfile {
     pub full_name: String,
 }
 
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 #[derive(Deserialize, Debug)]
 pub struct RedeemerProfile {
     pub mobile_number: String,
 }
 
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 #[derive(Deserialize, Debug)]
 pub struct Ticket {
     pub mobile: String,
@@ -82,6 +87,7 @@ pub struct Ticket {
     pub profile_pic: Option<String>,
 }
 
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 #[derive(Deserialize, Debug)]
 pub struct Data {
     pub voucher: Voucher,
@@ -97,6 +103,7 @@ impl Data {
     }
 }
 
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 #[derive(Deserialize, Debug)]
 pub struct APIResponse {
     pub status: Status,
@@ -121,4 +128,14 @@ impl Display for APIResponse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         write!(f, "{}", self.status.message)
     }
+}
+
+#[cfg(feature = "serialize")]
+pub fn serialize(resp: &APIResponse) -> Result<String, serde_json::Error> {
+    serde_json::to_string(resp)
+}
+
+#[cfg(feature = "serialize")]
+pub fn serialize_pretty(resp: &APIResponse) -> Result<String, serde_json::Error> {
+    serde_json::to_string_pretty(resp)
 }
