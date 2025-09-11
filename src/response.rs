@@ -126,7 +126,7 @@ impl APIResponse {
 
 impl Display for APIResponse {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.status.message)
+        write!(f, "{}: {}", self.status.code, self.status.message)
     }
 }
 
