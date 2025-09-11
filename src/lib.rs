@@ -9,7 +9,7 @@ const DEFAULT_USER_AGENT: &str = "Bun/1.2.21";
 
 pub struct VoucherClient {
     http_client: Client,
-    mobile: String,
+    pub mobile: String,
 }
 
 impl VoucherClient {
