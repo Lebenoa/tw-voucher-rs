@@ -47,6 +47,10 @@ impl Status {
             _ => StatusCode::Other(&self.code),
         }
     }
+
+    pub fn code_as_str(&self) -> &str {
+        &self.code
+    }
 }
 
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
