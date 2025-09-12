@@ -19,6 +19,9 @@ pub enum StatusCode<'a> {
     /// Provided voucher does not exists
     VoucherNotFound,
 
+    /// User not found
+    TargetUserNotFound,
+
     /// Other StatusCode that aren't list in the library.
     Other(&'a str),
 }
@@ -33,23 +36,20 @@ impl<'a> StatusCode<'a> {
 #[derive(Deserialize, Debug)]
 pub struct Status {
     pub message: String,
-    code: String,
+    pub code: String,
 }
 
 impl Status {
-    pub fn code(&self) -> StatusCode {
+    pub fn code_as_enum(&self) -> StatusCode {
         match self.code.as_str() {
             "VOUCHER_EXPIRED" => StatusCode::VoucherExpired,
             "VOUCHER_OUT_OF_STOCK" => StatusCode::VoucherOutOfStock,
             "CANNOT_GET_OWN_VOUCHER" => StatusCode::CannotGetOwnVoucher,
             "VOUCHER_NOT_FOUND" => StatusCode::VoucherNotFound,
+            "TARGET_USER_NOT_FOUND" => StatusCode::TargetUserNotFound,
             "SUCCESS" => StatusCode::Success,
             _ => StatusCode::Other(&self.code),
         }
-    }
-
-    pub fn code_as_str(&self) -> &str {
-        &self.code
     }
 }
 
@@ -116,7 +116,7 @@ pub struct APIResponse {
 
 impl APIResponse {
     pub fn is_valid_from_verify(&self) -> bool {
-        if !self.status.code().is_success() {
+        if !self.status.code_as_enum().is_success() {
             return false;
         }
 

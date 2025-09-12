@@ -7,9 +7,6 @@ pub enum Error {
     #[error("Most likely: Cloudflare Forbidden")]
     Forbidden,
 
-    #[error("Invalid Voucher: {0}")]
-    InvalidVoucher(String),
-
     #[error("reqwest throw an error: {0}")]
     Reqwest(#[from] reqwest::Error),
 

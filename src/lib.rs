@@ -199,7 +199,7 @@ impl VoucherClient {
 
         if status != StatusCode::OK {
             match status {
-                _ if !api_response.status.code().is_success() => {
+                _ if !api_response.status.code_as_enum().is_success() => {
                     return Err(Error::Voucher(Box::new(api_response)));
                 }
                 _ => {
