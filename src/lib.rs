@@ -1,5 +1,5 @@
-mod error;
-mod response;
+pub mod error;
+pub mod response;
 
 use std::collections::HashMap;
 
