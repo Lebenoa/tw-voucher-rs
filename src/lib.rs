@@ -10,7 +10,7 @@ use crate::{error::Error, response::APIResponse};
 pub const DEFAULT_USER_AGENT: &str = "Bun/1.2.21";
 
 pub struct VoucherClient {
-    http_client: Client,
+    pub http_client: Client,
     pub mobile: String,
 }
 
@@ -18,6 +18,10 @@ impl VoucherClient {
     /// Construct usable, default `reqwest::ClientBuilder`. Perfect for sharing across all `VoucherClient`
     pub fn new_http_client_builder(user_agent: &str) -> ClientBuilder {
         ClientBuilder::new().user_agent(user_agent).use_rustls_tls()
+    }
+
+    pub fn get_http_client(&self) -> Client {
+        self.http_client.clone()
     }
 
     /// Create new voucher client with new `reqwest::Client`  
