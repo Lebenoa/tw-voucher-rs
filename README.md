@@ -1,1 +1,1 @@
-# TrueWallet Voucher API for Rust
+# TrueWallet Voucher Library for Rust
