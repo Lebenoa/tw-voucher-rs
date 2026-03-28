@@ -40,7 +40,7 @@ pub struct Status {
 }
 
 impl Status {
-    pub fn code_as_enum(&self) -> StatusCode {
+    pub fn code_as_enum(&self) -> StatusCode<'_> {
         match self.code.as_str() {
             "VOUCHER_EXPIRED" => StatusCode::VoucherExpired,
             "VOUCHER_OUT_OF_STOCK" => StatusCode::VoucherOutOfStock,
