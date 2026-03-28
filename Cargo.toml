@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2024"
 description = "Async TrueWallet Voucher Library for Rust!"
 repository = "https://github.com/Lebenoa/tw-voucher-rs"
+license = "MIT or Apache-2.0"
 
 [dependencies]
 reqwest = { version = "0.13", features = ["rustls"] }
